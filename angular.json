@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "emitter-usage"
+  "defaultProject": "emitter-usage",
+  "cli": {
+    "analytics": "e8469a5a-1850-4312-9600-8ce7f077c999"
+  }
 }
