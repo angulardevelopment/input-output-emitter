@@ -9,13 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { ImageListComponent } from './image-list/image-list.component';
 import { ImageComponent } from './image-list/image/image.component';
+import { HelloComponent } from './hello/hello.component';
+import { ParentComponent } from './parent/parent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroComponent,
     HeroDetailComponent,
-    ImageDetailComponent, ImageListComponent, ImageComponent
+    ImageDetailComponent, ImageListComponent, ImageComponent, HelloComponent, ParentComponent
   ],
   imports: [
     BrowserModule,
