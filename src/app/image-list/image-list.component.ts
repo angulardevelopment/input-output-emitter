@@ -14,7 +14,9 @@ export class ImageListComponent  {
   images: Image[] = [];
   selectedImage: Image;
   @Output() selectedEvent: EventEmitter<Image> = new EventEmitter<Image>();
+  @Output() serverCreated = new EventEmitter<{ serverName: string, serverContent: string }>();
 
+  // @Output(‘bpCreated’) blueprintCreated = new EventEmitter<{ serverName: string, serverContent: string }>();
   constructor(public imageService?: ImageService) { }
 
   ngOnInit() {
