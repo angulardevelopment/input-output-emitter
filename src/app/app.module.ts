@@ -11,20 +11,39 @@ import { ImageListComponent } from './image-list/image-list.component';
 import { ImageComponent } from './image-list/image/image.component';
 import { HelloComponent } from './hello/hello.component';
 import { ParentComponent } from './parent/parent.component';
-
+import { TestService } from './services/test.service';
+import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from "@angular/core";
+import { BasicService } from './services/basic.service';
+import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeroComponent,
     HeroDetailComponent,
-    ImageDetailComponent, ImageListComponent, ImageComponent, HelloComponent, ParentComponent
+    ImageDetailComponent, ImageListComponent, ImageComponent, HelloComponent, ParentComponent,
+    AvoidNgonchangeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [TestService, BasicService,
+
+    // { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
+
+  //   { provide: APP_BOOTSTRAP_LISTENER, multi: true,
+  // useExisting: runOnBootstrap }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+function runSettingsOnInit() {
+  // …
+  }
+
+  function runOnBootstrap() {
+  // …
+  }
