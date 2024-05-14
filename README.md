@@ -20,7 +20,7 @@ I'm Sam, and I'm passionate about product engineering and web development. I cre
 
 
 ### About the app
-Data handle. 
+Data handle through services, emitters. 
 
 ## Subscribe and Stay Updated!
 
