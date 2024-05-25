@@ -1,4 +1,4 @@
-import { Component, Inject, Optional, inject } from '@angular/core';
+import { Component, Inject, Optional, VERSION } from '@angular/core';
 import { API_URL } from './services/app.config';
 import { BasicService } from './services/basic.service';
 import { apiService, DemoService } from './services/demo.service';
@@ -9,6 +9,8 @@ import { ProductService } from './services/product.service';
 import { TestService } from './services/test.service';
 import { APP_CONFIG, Test2Service } from './services/test2.service';
 import { UserconfigService, USER_CONFIG_TOKEN } from './services/userconfig.service';
+import { Meta, Title } from '@angular/platform-browser';
+import { DOCUMENT, Location } from '@angular/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -72,9 +74,10 @@ import { UserconfigService, USER_CONFIG_TOKEN } from './services/userconfig.serv
     { provide: ProductService, useExisting: NewproductService },
     { provide: NewproductService, useClass: NewproductService },
   ],
+  interpolation: ['((', '))'],
 })
 export class AppComponent {
-  title = 'emitter-usage';
+  name = 'Angular ' + VERSION.major;
   selectedImage: Image;
 
     // new way dont use @Inject
@@ -93,7 +96,11 @@ export class AppComponent {
       // @Inject('FUNC') public someFunc: any,
       // @Inject('USE_FAKE') public someFunc1: any,
       // @Inject(USER_CONFIG_TOKEN) private config: UserconfigService,
-      public Product: ProductService
+      public Product: ProductService,
+      meta: Meta,
+      private title: Title,
+      private location: Location,
+      @Inject(DOCUMENT) private _doc: Document
     ) {
       // console.log(this.test, this.googleMapsService, this.test2, 'sd1');
       // this.logger.log(`Fetched  heroes.`);
@@ -104,10 +111,42 @@ export class AppComponent {
       // console.log(this.someFunc1);
       // console.log(this.config);
       // console.log(this.Product.old());
+      console.log(_doc);
+      meta.addTag({
+        name: 'description',
+        content: 'sample content of meta service',
+      });
+      const authorName = meta.getTag("name='author'");
+      console.log(authorName);
+      meta.updateTag({
+        name: 'twitter:description',
+        content: 'sample description',
+      });
+      meta.removeTag("name='author'");
     }
 
   selectImage(image: Image) {
     this.selectedImage = image;
+  }
+
+  
+
+
+  navigateTo(url) {
+    this.location.go(url);
+  }
+  goBack() {
+    this.location.back();
+  }
+  goForward() {
+    this.location.forward();
+  }
+  ngOnInit() {
+    this.title.setTitle('Login');
+  }
+
+  renderCanvasElement() {
+    this._doc.getElementById('canvas');
   }
 }
 

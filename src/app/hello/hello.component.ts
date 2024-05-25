@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Attribute, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-hello',
@@ -8,8 +8,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class HelloComponent implements OnInit {
   @Input() company : string;
   @Output() close = new EventEmitter();
-  
-  constructor() { }
+  @Input() name: string;
+  constructor(@Attribute("type") public myVar: string) {
+    console.log("Attributre =", myVar);}
 
   ngOnInit(): void {
   }
