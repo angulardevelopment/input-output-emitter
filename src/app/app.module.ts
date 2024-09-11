@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroComponent } from './hero/hero.component';
@@ -15,6 +16,7 @@ import { TestService } from './services/test.service';
 import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from "@angular/core";
 import { BasicService } from './services/basic.service';
 import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/av
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [TestService, BasicService,
 
