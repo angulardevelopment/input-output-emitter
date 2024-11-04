@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ApplicationRef, createEnvironmentInjector, CUSTOM_ELEMENTS_SCHEMA, ENVIRONMENT_INITIALIZER, NgModule, Inject } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,8 @@ import { TestService } from './services/test.service';
 import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from "@angular/core";
 import { BasicService } from './services/basic.service';
 import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
+import { InitService } from './init.service';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -33,15 +35,30 @@ import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/av
     OAuthModule.forRoot()
   ],
   providers: [TestService, BasicService,
-
-    // { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
-
-  //   { provide: APP_BOOTSTRAP_LISTENER, multi: true,
-  // useExisting: runOnBootstrap }
+    { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
+    { provide: APP_BOOTSTRAP_LISTENER, multi: true,
+  useExisting: runOnBootstrap }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private appRef: ApplicationRef) {
+    // const parentInjector = Inject(InitService); // existing environment injector
+
+    // const injector = createEnvironmentInjector([
+    //   {
+    //     provide: ENVIRONMENT_INITIALIZER,
+    //     useFactory: (initService: InitService) => () => initService.initialize(),
+    //     deps: [InitService],
+    //     multi: true,
+    //   },
+    // ], parentInjector);
+
+    // // // Run the injector to trigger initialization logic
+    // injector.get(ENVIRONMENT_INITIALIZER).forEach((initializer) => initializer());
+  }
+ }
 
 
 function runSettingsOnInit() {
