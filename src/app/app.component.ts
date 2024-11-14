@@ -25,6 +25,7 @@ import { DOCUMENT, Location } from '@angular/common';
     { provide: 'add', useClass: DemoService },
 
     { provide: Demo1Service, useClass: GooglemapsService },
+    // Register the token in the providers array.
 
     { provide: API_URL, useValue: 'http://SomeEndPoint.com/api' },
 
@@ -91,7 +92,10 @@ export class AppComponent {
     private googleMapsService: Demo1Service,
     @Optional() private test2: Test2Service,
     private logger: BasicService,
+    
+    // It is then injected using the @Inject in the constructor of the service/component.
     @Inject(API_URL) private apiURL: string,
+
     @Inject('APP_CONFIG') public appConfig: any,
     @Inject('FUNC') public someFunc: any,
     @Inject('USE_FAKE') public someFunc1: any,
@@ -100,7 +104,8 @@ export class AppComponent {
     meta: Meta,
     private title: Title,
     private location: Location,
-    @Inject(DOCUMENT) private _doc: Document
+    @Inject(DOCUMENT) private _doc: Document,
+    
   ) {
     console.log(this.test, this.googleMapsService, this.test2, 'sd1');
     this.logger.log(`Fetched  heroes.`);

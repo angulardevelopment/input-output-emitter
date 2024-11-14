@@ -2,4 +2,28 @@
 
 <button (click)="sendData()"> send</button>
 
+<!-- (event)="statement". -->
+<button (click)="deleteHero()"> template statement Delete hero</button>
 
+<input type="text" (keyup)="onKeyup($event.target)"> 
+
+<button (click)="tableView.addRow('row1')">addRow</button>
+<button (click)="tableView.addCol('col1')">AddCol</button>
+
+<table *ngIf="tableView.isVisible" border="1">
+<thead>
+<tr>
+<td *ngFor="let col of tableView.columns">
+{{col.title}}
+</td>
+</tr>
+
+</thead>
+<tbody>
+<tr *ngFor="let row of tableView.rows" (click)="doSomething(row)">
+<td *ngFor="let col of tableView.columns">
+Cell
+</td>
+</tr>
+</tbody>
+</table>
