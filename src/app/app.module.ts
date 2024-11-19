@@ -16,7 +16,7 @@ import { TestService } from './services/test.service';
 import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from "@angular/core";
 import { BasicService } from './services/basic.service';
 import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
-import { InitService } from './init.service';
+import { bootstrapFactory, InitService } from './init.service';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -34,17 +34,31 @@ import { environment } from 'src/environments/environment';
     HttpClientModule,
     OAuthModule.forRoot()
   ],
-  providers: [TestService, BasicService,
+  providers: [
+    TestService, 
+    BasicService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: initFactory, // will be created
+    //   multi: true,
+    //   deps: [InitService], // will be created to see if it works
+    // },
     { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
-    { provide: APP_BOOTSTRAP_LISTENER, multi: true,
-  useExisting: runOnBootstrap }
+    { provide: APP_BOOTSTRAP_LISTENER, multi: true, useFactory: bootstrapFactory, // will be created
+      deps: [InitService], },
+    {
+      provide: ENVIRONMENT_INITIALIZER,
+      useFactory: (initService: InitService) => () => initService.initialize(),
+      deps: [InitService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
   constructor(private appRef: ApplicationRef) {
-    // const parentInjector = Inject(InitService); // existing environment injector
+    const parentInjector = Inject(InitService); // existing environment injector
 
     // const injector = createEnvironmentInjector([
     //   {
@@ -53,18 +67,21 @@ export class AppModule {
     //     deps: [InitService],
     //     multi: true,
     //   },
-    // ], parentInjector);
+    // ], appRef);
 
-    // // // Run the injector to trigger initialization logic
+    // // Run the injector to trigger initialization logic
     // injector.get(ENVIRONMENT_INITIALIZER).forEach((initializer) => initializer());
   }
  }
 
 
 function runSettingsOnInit() {
+  console.log('runSettingsOnInit')
   // …
   }
 
   function runOnBootstrap() {
+  console.log('runOnBootstrap')
+
   // …
   }
