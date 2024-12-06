@@ -1,7 +1,7 @@
 // import { ImageService } from './../image.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImageService } from '../image.service';
-import {Image} from '../app.component';
+import {Image} from '../populate-image/image'
 
 @Component({
   selector: 'app-image-list',

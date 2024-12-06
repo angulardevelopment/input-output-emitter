@@ -1,30 +1,24 @@
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DemoService {
-
-  constructor() { }
+  constructor() {}
 }
 
 // With DI
 @Injectable()
 class MyService {
-private readonly depA: MyDep = inject(MyDep);
+  private readonly depA: MyDep = inject(MyDep);
 }
 
-class MyServiceWithoutDI
-{
+class MyServiceWithoutDI {
   private readonly depA: MyDep;
-  
+
   constructor() {
     this.depA = new MyDep();
   }
-  
-  }
+}
 
-
-  class MyDep{
-
-  }
+class MyDep {}

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Image } from '../app.component';
+import { Image } from '../populate-image/image';
 @Component({
   selector: 'app-image-detail',
   templateUrl: './image-detail.component.html',

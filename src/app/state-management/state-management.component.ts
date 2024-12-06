@@ -78,9 +78,13 @@ import { DOCUMENT, Location } from '@angular/common';
   ],
 })
 export class StateManagementComponent {
+    // new way dont use Inject
+  // https://angular.io/errors/NG0203
+  // private readonly myToken = inject(API_URL); // Typed as a string
   constructor(
       // here We transform the elementId parameter to an injection token
     @Inject('elementId') private test: TestService,
+  
     @Inject('add') private useService: apiService,
     private googleMapsService: Demo1Service,
     @Optional() private test2: Test2Service,
@@ -97,21 +101,21 @@ export class StateManagementComponent {
     meta: Meta,
     
   ) {
-    console.log(this.test, this.googleMapsService, this.test2, 'sd1');
-    this.logger.log(`Fetched  heroes.`);
-    console.log(apiURL);
-    console.log(this.useService.apiUrl(), 'apiUrl useService');
+    // console.log(this.test, this.googleMapsService, this.test2, 'sd1');
+    // this.logger.log(`Fetched  heroes.`);
+    console.log(apiURL, 'apiURL');
+    console.log(this.useService.apiUrl(), 'useService');
     console.log(this.appConfig, 'appConfig');
-    console.log(someFunc());
-    console.log(this.someFunc1);
-    console.log(this.config);
-    console.log(this.Product.old());
+    // console.log(someFunc());
+    // console.log(this.someFunc1);
+    console.log(config, 'USER_CONFIG_TOKEN');
+    // console.log(this.Product.old());
     meta.addTag({
       name: 'description',
       content: 'sample content of meta service',
     });
     const authorName = meta.getTag("name='author'");
-    console.log(authorName);
+    // console.log(authorName);
     meta.updateTag({
       name: 'twitter:description',
       content: 'sample description',

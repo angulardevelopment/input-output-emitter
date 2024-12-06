@@ -14,7 +14,9 @@ export const platformInitFactory = (a: InitService): (() => void) => {
     console.log('PLATFORM_INITIALIZER callback');
   };
 };
-export const bootstrapFactory = (x: InitService): ((c: ComponentRef<any>) => void) => {
+export const bootstrapFactory = (
+  x: InitService
+): ((c: ComponentRef<any>) => void) => {
   console.log('APP_BOOTSTRAP_LISTENER factory called', x);
   return (c: ComponentRef<any>) => {
     console.log('APP_BOOTSTRAP_LISTENER Callback:', c.location.nativeElement);
@@ -22,11 +24,10 @@ export const bootstrapFactory = (x: InitService): ((c: ComponentRef<any>) => voi
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InitService {
-
-  constructor() { }
+  constructor() {}
 
   initialize() {
     console.log('Initialization logic executed');

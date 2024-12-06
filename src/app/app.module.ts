@@ -1,5 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ApplicationRef, createEnvironmentInjector, CUSTOM_ELEMENTS_SCHEMA, ENVIRONMENT_INITIALIZER, NgModule, Inject } from '@angular/core';
+import {
+  ApplicationRef,
+  createEnvironmentInjector,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ENVIRONMENT_INITIALIZER,
+  NgModule,
+  Inject,
+} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,29 +20,37 @@ import { ImageComponent } from './image-list/image/image.component';
 import { HelloComponent } from './hello/hello.component';
 import { ParentComponent } from './parent/parent.component';
 import { TestService } from './services/test.service';
-import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from "@angular/core";
+import { APP_BOOTSTRAP_LISTENER, APP_INITIALIZER } from '@angular/core';
 import { BasicService } from './services/basic.service';
 import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
 import { bootstrapFactory, InitService } from './init.service';
 import { environment } from 'src/environments/environment';
+import { PopulateImageComponent } from './populate-image/populate-image.component';
+import { HelloBindingComponent } from './hello-binding/hello-binding.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroComponent,
     HeroDetailComponent,
-    ImageDetailComponent, ImageListComponent, ImageComponent, HelloComponent, ParentComponent,
-    AvoidNgonchangeComponent
+    ImageDetailComponent,
+    ImageListComponent,
+    ImageComponent,
+    HelloComponent,
+    ParentComponent,
+    AvoidNgonchangeComponent,
+    PopulateImageComponent,
+    HelloBindingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
   ],
   providers: [
-    TestService, 
+    TestService,
     BasicService,
     // {
     //   provide: APP_INITIALIZER,
@@ -44,8 +59,12 @@ import { environment } from 'src/environments/environment';
     //   deps: [InitService], // will be created to see if it works
     // },
     { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
-    { provide: APP_BOOTSTRAP_LISTENER, multi: true, useFactory: bootstrapFactory, // will be created
-      deps: [InitService], },
+    {
+      provide: APP_BOOTSTRAP_LISTENER,
+      multi: true,
+      useFactory: bootstrapFactory, // will be created
+      deps: [InitService],
+    },
     {
       provide: ENVIRONMENT_INITIALIZER,
       useFactory: (initService: InitService) => () => initService.initialize(),
@@ -54,7 +73,7 @@ import { environment } from 'src/environments/environment';
     },
   ],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
   constructor(private appRef: ApplicationRef) {
@@ -72,16 +91,15 @@ export class AppModule {
     // // Run the injector to trigger initialization logic
     // injector.get(ENVIRONMENT_INITIALIZER).forEach((initializer) => initializer());
   }
- }
-
+}
 
 function runSettingsOnInit() {
-  console.log('runSettingsOnInit')
+  console.log('runSettingsOnInit');
   // …
-  }
+}
 
-  function runOnBootstrap() {
-  console.log('runOnBootstrap')
+function runOnBootstrap() {
+  console.log('runOnBootstrap');
 
   // …
-  }
+}
