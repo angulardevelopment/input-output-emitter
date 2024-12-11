@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Attribute,
   Component,
   EventEmitter,
@@ -12,7 +13,7 @@ import {
   templateUrl: './hello.component.html',
   styleUrls: ['./hello.component.scss'],
 })
-export class HelloComponent implements OnInit {
+export class HelloComponent implements OnInit, AfterViewInit {
   @Input() company: string;
   @Output() close = new EventEmitter();
   @Input() name: string;
@@ -27,210 +28,187 @@ export class HelloComponent implements OnInit {
     this.close.emit('data');
   }
 
-  
-values = '';
-onKey(event: any) { // without type info
-this.values += event.target.value + ' | ';
-// onKey(event: KeyboardEvent) { // with type info
-// this.values += (<HTMLInputElement>event.target).value + ' | ';
-}
+  values = '';
+  onKey(event: any) {
+    // without type info
+    this.values += event.target.value + ' | ';
+    // onKey(event: KeyboardEvent) { // with type info
+    // this.values += (<HTMLInputElement>event.target).value + ' | ';
+  }
 
-value = '';
-onEnter(value: string) {
-this.value = value;
-}
+  value = '';
+  onEnter(value: string) {
+    this.value = value;
+  }
 
-valueblur = '';
-update(value: string) { this.valueblur = value; }
+  valueblur = '';
+  update(value: string) {
+    this.valueblur = value;
+  }
 
-heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
-addHero(newHero: string) {
-if (newHero) {
-this.heroes.push(newHero);
-}
-}
+  heroes = ['Windstorm', 'Bombasto', 'Magneta', 'Tornado'];
+  addHero(newHero: string) {
+    if (newHero) {
+      this.heroes.push(newHero);
+    }
+  }
 
-serverName;
+  serverName;
 
-onUpdateServerName(event: Event) {
+  onUpdateServerName(event: Event) {
+    this.serverName = (<HTMLInputElement>event.target).value;
+  }
 
-this.serverName = (<HTMLInputElement>event.target).value;
+  abc = ['gupta', 'singh', 'kumar', 'garg'].sort();
 
-}
+  abcd = ['gupta', 'singh', 'kumar', 'garg'].sort();
 
+  assignCopy() {
+    this.abcd = Object.assign([], this.abc);
+  }
 
-abc = ["gupta", "singh", "kumar", "garg"].sort();
+  filterItem(value) {
+    if (!value) this.assignCopy(); //when nothing has typed
 
-abcd = ["gupta", "singh", "kumar", "garg"].sort();
+    this.abcd = Object.assign([], this.abc).filter(
+      (ab) => ab.toLowerCase().indexOf(value.toLowerCase()) > -1
+    );
+  }
+  rangeValue: number = 10;
 
-assignCopy() {
+  isActive: boolean = false;
 
-this.abcd = Object.assign([], this.abc);
+  press(): void {
+    this.isActive = true;
 
-}
+    console.log((this.isActive = true));
+  }
 
-filterItem(value) {
+  release(): void {
+    this.isActive = false;
 
-if (!value) this.assignCopy(); //when nothing has typed
+    console.log((this.isActive = false));
+  }
 
-this.abcd = Object.assign([], this.abc).filter(
-
-ab => ab.toLowerCase().indexOf(value.toLowerCase()) > -1
-
-)
-}
-rangeValue: number = 10;
-
-isActive: boolean = false;
-
-press(): void {
-
-this.isActive = true;
-
-console.log(this.isActive = true);
-
-}
-
-release(): void {
-
-this.isActive = false;
-
-console.log(this.isActive = false);
-
-}
-
-ngAfterViewInit() {
-
+  ngAfterViewInit() {
     function dragElement(elmnt) {
-    
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    
-    if (document.getElementById(elmnt.id + "header")) {
-    
-    /* if present, the header is where you move the DIV from:*/
-    
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    
-    } else {
-    
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
-    
-    elmnt.onmousedown = dragMouseDown;
-    
-    }
-    
-    function dragMouseDown(e) {
-    
-    e = e || window.event;
-    
-    // get the mouse cursor position at startup:
-    
-    pos3 = e.clientX;
-    
-    pos4 = e.clientY;
-    
-    document.onmouseup = closeDragElement;
-    
-    // call a function whenever the cursor moves:
-    
-    document.onmousemove = elementDrag;
-    
-    }
-    
-    function elementDrag(e) {
-    
-    e = e || window.event;
-    
-    // calculate the new cursor position:
-    
-    pos1 = pos3 - e.clientX;
-    
-    pos2 = pos4 - e.clientY;
-    
-    pos3 = e.clientX;
-    
-    pos4 = e.clientY;
-    
-    // set the element's new position:
-    
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    
-    }
-    
-    function closeDragElement() {
-    
-    /* stop moving when mouse button is released:*/
-    
-    document.onmouseup = null;
-    
-    document.onmousemove = null;
-    
-    }
-    
-    }
-    
-    dragElement(document.getElementById(("mydiv")));
-    
+      var pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
+
+      if (document.getElementById(elmnt.id + 'header')) {
+        /* if present, the header is where you move the DIV from:*/
+
+        document.getElementById(elmnt.id + 'header').onmousedown =
+          dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+
+        // get the mouse cursor position at startup:
+
+        pos3 = e.clientX;
+
+        pos4 = e.clientY;
+
+        document.onmouseup = closeDragElement;
+
+        // call a function whenever the cursor moves:
+
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+
+        // calculate the new cursor position:
+
+        pos1 = pos3 - e.clientX;
+
+        pos2 = pos4 - e.clientY;
+
+        pos3 = e.clientX;
+
+        pos4 = e.clientY;
+
+        // set the element's new position:
+
+        elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
+
+        elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
+      }
+
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+
+        document.onmouseup = null;
+
+        document.onmousemove = null;
+      }
     }
 
-    onKeyup(target: EventTarget | null) { if (target instanceof HTMLInputElement) { console.log(target.value) } }
+    dragElement(document.getElementById('mydiv'));
+  }
 
-    deleteHero(){
-      console.log('hi')
+  onKeyup(target: EventTarget | null) {
+    if (target instanceof HTMLInputElement) {
+      console.log(target.value);
     }
+  }
 
-    
-tableView = new TableData(5, 4);
-doSomething(row) {
-console.log('doSomething with row', row);
+  deleteHero() {
+    console.log('hi');
+  }
+
+  tableView = new TableData(5, 4);
+  doSomething(row) {
+    console.log('doSomething with row', row);
+  }
 }
-
-}
-
 
 export class TableData {
   isVisible: boolean = false;
   rows: Item[] = [];
   columns: Item[] = [];
-  
+
   constructor(rows?: number, cols?: number) {
-  if (rows) {
-  for (let i = 0; i < rows; i++) {
-  this.addRow(i.toString());
+    if (rows) {
+      for (let i = 0; i < rows; i++) {
+        this.addRow(i.toString());
+      }
+    }
+
+    if (cols) {
+      for (let i = 0; i < cols; i++) {
+        this.addCol(i.toString());
+      }
+    }
   }
-  }
-  
-  if (cols) {
-  for (let i = 0; i < cols; i++) {
-  this.addCol(i.toString());
-  }
-  }
-  }
-  
+
   addRow(rowTitle: string) {
-  let row: Item = {
-  id: this.rows.length,
-  title: rowTitle
+    let row: Item = {
+      id: this.rows.length,
+      title: rowTitle,
+    };
+    this.rows.push(row);
   }
-  this.rows.push(row);
-  }
-  
+
   addCol(colTitle: string) {
-  let col: Item = {
-  id: this.columns.length,
-  title: colTitle
+    let col: Item = {
+      id: this.columns.length,
+      title: colTitle,
+    };
+    this.columns.push(col);
   }
-  this.columns.push(col);
-  }
-  
-  }
-  
-  interface Item {
+}
+
+interface Item {
   id: number;
-  title: string
-  }
-  
-  
-  
+  title: string;
+}

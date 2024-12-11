@@ -9,7 +9,7 @@ import {Image} from '../populate-image/image'
   styleUrls: ['./image-list.component.css'],
   // providers: [ImageService]
 })
-export class ImageListComponent  {
+export class ImageListComponent implements OnInit {
 
   images: Image[] = [];
   selectedImage: Image;
