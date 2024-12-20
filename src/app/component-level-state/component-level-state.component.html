@@ -1,0 +1,24 @@
+<p>RxAngular directives are optimized for fine-grained reactivity down to the EmbeddedViewRef. This means that only the necessary parts of your template are updated when data changes, leading to better performance.</p>
+  <p>
+  RxAngular directives support lazy template creation, which can help improve performance by deferring the creation of template elements until they are actually needed.
+  Users want 60fps and smooth interactions with applications, and RxAngular directives are optimized for this. They ensure that your application remains responsive and performant even when dealing with large amounts of changes by making use of concurrent mode.</p> <p>
+  rxIf, rxLet, rxFor, and rxVirtualFor (When dealing with large lists, virtual scrolling becomes essential for maintaining performance. The rxVirtualFor directive enables virtual scrolling by rendering only the items currently visible in the viewport. With signal support, you can bind a signal representing a large array to rxVirtualFor, and it will efficiently manage the rendering process as the user scrolls.)</p>
+<div *rxLet="userData; let user">
+  <p>Welcome, {{ user.name }}!</p>
+  <p>Your email is: {{ user.email }}</p>
+</div>
+
+
+<div *rxIf="showContent">This content is displayed conditionally.</div>
+
+<ul>
+  <li *rxFor="let item of items">{{ item }}</li>
+</ul>
+
+<rx-virtual-scroll-viewport [itemSize]="50">
+  <div *rxVirtualFor="let item of items">{{ item }}</div>
+</rx-virtual-scroll-viewport>
+
+<div *rxLet="state$; let state">
+  {{ state }}
+</div>

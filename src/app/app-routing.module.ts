@@ -4,6 +4,7 @@ import { ParentComponent } from './parent/parent.component';
 import { AvoidNgonchangeComponent } from './input-Observable/avoid-ngonchange/avoid-ngonchange.component';
 import { HeroComponent } from './hero/hero.component';
 import { StateManagementComponent } from './state-management/state-management.component';
+import { ComponentLevelStateComponent } from './component-level-state/component-level-state.component';
 
 const routes: Routes = [{
   path: 'ParentComponent',
@@ -20,6 +21,10 @@ const routes: Routes = [{
 {
   path: 'StateManagementComponent',
   component: StateManagementComponent
+},
+{
+  path: 'ComponentLevelStateComponent',
+  component: ComponentLevelStateComponent
 },
 ];
 
