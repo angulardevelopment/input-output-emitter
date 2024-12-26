@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 
+// By changing the `providedIn` property of your service to `'any'`, you ensure that each lazy-loaded component that accesses the service gets its own instance, allowing for better encapsulation and management of service state.
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', // Change this from 'root' to 'any'
 })
 export class DemoService {
   constructor() {}
