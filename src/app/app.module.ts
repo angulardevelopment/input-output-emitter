@@ -66,6 +66,7 @@ import { HelloBindingComponent } from './hello-binding/hello-binding.component';
       deps: [InitService],
     },
     {
+      // ENVIRONMENT_INITIALIZER token allows you to define initialization logic that runs when the injector is created, making it possible to perform necessary setup before your application starts.
       provide: ENVIRONMENT_INITIALIZER,
       useFactory: (initService: InitService) => () => initService.initialize(),
       deps: [InitService],
@@ -79,6 +80,7 @@ export class AppModule {
   constructor(private appRef: ApplicationRef) {
     const parentInjector = Inject(InitService); // existing environment injector
 
+    // This function is used to create a new environment injector that can be used for dependency injection in your Angular application.
     // const injector = createEnvironmentInjector([
     //   {
     //     provide: ENVIRONMENT_INITIALIZER,
