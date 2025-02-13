@@ -1,6 +1,7 @@
 import { Component, Inject, Optional, VERSION } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT, Location } from '@angular/common';
+import { Router, Routes } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,8 @@ export class AppComponent {
   constructor(
     private title: Title,
     private location: Location,
-    @Inject(DOCUMENT) private _doc: Document
+    @Inject(DOCUMENT) private _doc: Document,
+    private router: Router
   ) {
     console.log(_doc);
   }
@@ -32,4 +34,13 @@ export class AppComponent {
   renderCanvasElement() {
     this._doc.getElementById('canvas');
   }
+
+  routes: Routes = [];
+
+  ngAfterViewInit(): void {
+    // Fetch the routes from the router
+    this.routes = this.router.config;
+    console.log(this.routes);
+  }
+
 }
