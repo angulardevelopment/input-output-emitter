@@ -29,52 +29,50 @@ import { PopulateImageComponent } from './populate-image/populate-image.componen
 import { HelloBindingComponent } from './hello-binding/hello-binding.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeroComponent,
-    HeroDetailComponent,
-    ImageDetailComponent,
-    ImageListComponent,
-    ImageComponent,
-    HelloComponent,
-    ParentComponent,
-    AvoidNgonchangeComponent,
-    PopulateImageComponent,
-    HelloBindingComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    OAuthModule.forRoot(),
-  ],
-  providers: [
-    TestService,
-    BasicService,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initFactory, // will be created
-    //   multi: true,
-    //   deps: [InitService], // will be created to see if it works
-    // },
-    { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
-    {
-      provide: APP_BOOTSTRAP_LISTENER,
-      multi: true,
-      useFactory: bootstrapFactory, // will be created
-      deps: [InitService],
-    },
-    {
-      // ENVIRONMENT_INITIALIZER token allows you to define initialization logic that runs when the injector is created, making it possible to perform necessary setup before your application starts.
-      provide: ENVIRONMENT_INITIALIZER,
-      useFactory: (initService: InitService) => () => initService.initialize(),
-      deps: [InitService],
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        OAuthModule.forRoot(),
+        AppComponent,
+        HeroComponent,
+        HeroDetailComponent,
+        ImageDetailComponent,
+        ImageListComponent,
+        ImageComponent,
+        HelloComponent,
+        ParentComponent,
+        AvoidNgonchangeComponent,
+        PopulateImageComponent,
+        HelloBindingComponent,
+    ],
+    providers: [
+        TestService,
+        BasicService,
+        // {
+        //   provide: APP_INITIALIZER,
+        //   useFactory: initFactory, // will be created
+        //   multi: true,
+        //   deps: [InitService], // will be created to see if it works
+        // },
+        { provide: APP_INITIALIZER, useFactory: runSettingsOnInit },
+        {
+            provide: APP_BOOTSTRAP_LISTENER,
+            multi: true,
+            useFactory: bootstrapFactory, // will be created
+            deps: [InitService],
+        },
+        {
+            // ENVIRONMENT_INITIALIZER token allows you to define initialization logic that runs when the injector is created, making it possible to perform necessary setup before your application starts.
+            provide: ENVIRONMENT_INITIALIZER,
+            useFactory: (initService: InitService) => () => initService.initialize(),
+            deps: [InitService],
+            multi: true,
+        },
+    ],
+    // bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
   constructor(private appRef: ApplicationRef) {

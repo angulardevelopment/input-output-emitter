@@ -12,6 +12,8 @@ import {
   selector: 'app-hello',
   templateUrl: './hello.component.html',
   styleUrls: ['./hello.component.scss'],
+  standalone: true, // This component is standalone
+  imports: [], // Add any necessary imports here
 })
 export class HelloComponent implements OnInit, AfterViewInit {
   @Input() company: string;

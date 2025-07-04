@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { HelloComponent } from '../hello/hello.component';
 
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
-  styleUrls: ['./parent.component.scss']
+  styleUrls: ['./parent.component.scss'],
+  standalone: true,
+  imports: [HelloComponent]
 })
 export class ParentComponent implements OnInit {
   companyData = "test";

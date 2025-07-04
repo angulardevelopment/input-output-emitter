@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 
 @Component({
   selector: 'app-hero',
   templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss']
+  styleUrls: ['./hero.component.scss'],
+  standalone: true, // This component is standalone
+  imports: [HeroDetailComponent] // Add any necessary imports here, if needed
 })
 export class HeroComponent implements OnInit {
 

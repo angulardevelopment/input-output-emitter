@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Image} from './populate-image/image';
+import {Image} from './populate-image/Image';
 
 @Injectable({
   providedIn: 'root',

@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,6 +6,8 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'app-avoid-ngonchange',
   templateUrl: './avoid-ngonchange.component.html',
   styleUrls: ['./avoid-ngonchange.component.css'],
+  imports: [AsyncPipe],
+  standalone: true
 })
 export class AvoidNgonchangeComponent implements OnInit {
   @Input()

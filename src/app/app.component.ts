@@ -2,11 +2,15 @@ import { Component, Inject, Optional, VERSION } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT, Location } from '@angular/common';
 import { Router, Routes } from '@angular/router';
+import { Content } from './content/content';
+import { Navigation } from './navigation/navigation';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  interpolation: ['((', '))'],
+  standalone: true,
+  imports: [Content, Navigation],
+  // interpolation: ['((', '))'],
 })
 export class AppComponent {
   constructor(

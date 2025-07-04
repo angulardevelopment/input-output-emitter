@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "emitter-usage:build"
+            "buildTarget": "emitter-usage:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "emitter-usage:build:production"
+              "buildTarget": "emitter-usage:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "emitter-usage:build"
+            "buildTarget": "emitter-usage:build"
           }
         },
         "test": {
@@ -127,7 +127,6 @@
       }
     }
   },
-  "defaultProject": "emitter-usage",
   "cli": {
     "analytics": "e8469a5a-1850-4312-9600-8ce7f077c999"
   }

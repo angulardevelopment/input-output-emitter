@@ -1,5 +1,5 @@
 <p>State management</p>
-<div *ngIf="routes && routes.length">
+<!-- <div *ngIf="routes && routes.length">
     <h2>Available Routes</h2>
     <ul>
       <li *ngFor="let route of routes">
@@ -8,4 +8,10 @@
       
     </ul>
   </div>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+<div class="main-layout">
+  <app-navigation></app-navigation>
+  <div class="content-area">
+    <app-content></app-content>
+  </div>
+</div>
